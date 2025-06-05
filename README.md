@@ -1,48 +1,75 @@
-# recell
-Linear Regression
+# RECELL-Linear Regression Model
+**Overview**
 
-Problem Statement:
+This project demonstrates the application of a linear regression model to predict the normalized used price of products based on various features. The dataset comprises 3,454 samples with 48 predictor variables. The model was developed using Python's statsmodels library and evaluated using several performance metrics.
 
-Business Context:
+**Exploratory Data Analysis (EDA)**
 
-Buying and selling used phones and tablets used to be something that happened on a handful of online marketplace sites. But the used and refurbished device market has grown considerably over the past decade, and a new IDC (International Data Corporation) forecast predicts that the used phone market would be worth $52.7bn by 2023 with a compound annual growth rate (CAGR) of 13.6% from 2018 to 2023. This growth can be attributed to an uptick in demand for used phones and tablets that offer considerable savings compared with new models.
+Exploratory Data Analysis (EDA) is a crucial first step in data analysis, allowing us to understand the dataset's structure, detect anomalies, and uncover underlying patterns. In this project, EDA was performed to assess data quality and inform subsequent modeling decisions.
 
-Refurbished and used devices continue to provide cost-effective alternatives to both consumers and businesses that are looking to save money when purchasing one. There are plenty of other benefits associated with the used device market. Used and refurbished devices can be sold with warranties and can also be insured with proof of purchase. Third-party vendors/platforms, such as Verizon, Amazon, etc., provide attractive offers to customers for refurbished devices. Maximizing the longevity of devices through second-hand trade also reduces their environmental impact and helps in recycling and reducing waste. The impact of the COVID-19 outbreak may further boost this segment as consumers cut back on discretionary spending and buy phones and tablets only for immediate needs.
+**Key EDA Steps:**
 
-Objective:
+- Data Inspection: Loaded the dataset and examined its dimensions, column names, and data types.
 
-The rising potential of this comparatively under-the-radar market fuels the need for an ML-based solution to develop a dynamic pricing strategy for used and refurbished devices. ReCell, a startup aiming to tap the potential in this market, has hired you as a data scientist. They want you to analyze the data provided and build a linear regression model to predict the price of a used phone/tablet and identify factors that significantly influence it.
+- Missing Values: Identified and handled missing data appropriately to ensure model accuracy.
 
-Data Description:
+- Statistical Summary: Generated summary statistics to understand the distribution and central tendencies of numerical features.
 
-The data contains the different attributes of used/refurbished phones and tablets. The data was collected in the year 2021. The detailed data dictionary is given below.
+- Visualizations: Created histograms, box plots, and scatter plots to visualize data distributions and relationships between variables.
 
-brand_name: Name of manufacturing brand
+- Correlation Analysis: Computed correlation matrices to identify potential multicollinearity among features.
+**Linear Regression Model Development**
+  
+Following EDA, a Multiple Linear Regression (MLR) model was developed to predict the target variable, normalized_used_price, based on various predictors.
 
-os: OS on which the device runs
+**Modeling Steps:**
 
-screen_size: Size of the screen in cm
+- Data Preparation: Defined predictors (X) and target (y), and added a constant to the predictors.
 
-4g: Whether 4G is available or not
+- Data Splitting: Divided the dataset into training (70%) and testing (30%) sets.
 
-5g: Whether 5G is available or not
+- Model Fitting: Trained the model using Ordinary Least Squares (OLS) regression.
 
-main_camera_mp: Resolution of the rear camera in megapixels
+- Feature Selection: Performed stepwise regression to select significant features, removing those with high p-values.
 
-selfie_camera_mp: Resolution of the front camera in megapixels
+- Multicollinearity Check: Assessed Variance Inflation Factors (VIF) to detect and address multicollinearity.
 
-int_memory: Amount of internal memory (ROM) in GB
+**Model Evaluation**
 
-ram: Amount of RAM in GB
+Performance metrics on the test set are as follows:
 
-battery: Energy capacity of the device battery in mAh
+- RMSE: 0.240541
 
-weight: Weight of the device in grams
+- MAE: 0.189391
 
-release_year: Year when the device model was released
+- R-squared: 0.830093
 
-days_used: Number of days the used/refurbished device has been used
+- Adjusted R-squared: 0.827596
 
-normalized_new_price: Normalized price of a new device of the same model in euros
+- MAPE: 4.541333%
 
-normalized_used_price: Normalized price of the used/refurbished device in euros
+- MSE: 0.05786
+
+These metrics suggest a strong fit of the model to the data.
+
+**Assumption Checks**
+
+Assumptions of linear regression were validated:
+
+- **Linearity:** Assessed via residual plots.
+
+- **Normality:** Residuals approximately follow a normal distribution (Shapiro-Wilk test p-value < 0.05).
+
+- **Homoscedasticity:** No evidence of heteroscedasticity (Goldfeld-Quandt test p-value > 0.05).
+
+- **Multicollinearity**
+Variance Inflation Factor (VIF) analysis identified multicollinearity among certain predictors. Features with high VIF values were removed iteratively, leading to a refined model.
+
+**Final Model**
+
+After addressing multicollinearity and selecting significant predictors, the final model was retrained. Performance metrics remained consistent with the initial evaluation.
+
+**Conclusion**
+
+The linear regression model effectively predicts the normalized used price, with strong performance metrics and validated assumptions. Future work may explore regularization techniques to further enhance model robustness.
+
